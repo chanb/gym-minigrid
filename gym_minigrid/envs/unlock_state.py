@@ -2,13 +2,15 @@ from gym_minigrid.minigrid import Ball
 from gym_minigrid.roomgrid import RoomGrid
 from gym_minigrid.register import register
 
+import numpy as np
+
 class UnlockState(RoomGrid):
     """
     Unlock a door
     """
 
     def __init__(self, seed=None):
-        room_size = 6
+        room_size = 10
         super().__init__(
             num_rows=1,
             num_cols=2,
@@ -44,18 +46,12 @@ class UnlockState(RoomGrid):
         Generate the agent's view (partially observable, low-resolution encoding)
         """
 
-        # obs = {
-        #     "agent": self.agent_pos,
-        #     "key": self.key,
-        #     "door": self.door,
-        # }
-
-        obs = [
+        obs = np.array([
             *self.agent_pos,
             *self.key.cur_pos,
             *self.door.cur_pos,
-            self.door.is_open,
-        ]
+            int(self.door.is_open),
+        ])
 
         return obs
 
