@@ -55,6 +55,9 @@ class UnlockState(RoomGrid):
         ])
 
         return obs
+    
+    def render(self):
+        super().render(mode="rgb")
 
 register(
     id='MiniGrid-Unlock-State-v0',
