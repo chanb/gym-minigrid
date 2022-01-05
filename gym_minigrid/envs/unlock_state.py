@@ -48,7 +48,7 @@ class UnlockState(RoomGrid):
 
         obs = np.array([
             *self.agent_pos,
-            *self.agent_dir,
+            self.agent_dir,
             *self.key.cur_pos,
             *self.door.cur_pos,
             int(self.door.is_open),
