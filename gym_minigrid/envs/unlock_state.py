@@ -10,7 +10,7 @@ class UnlockState(RoomGrid):
     """
 
     def __init__(self, seed=None):
-        room_size = 10
+        room_size = 6
         super().__init__(
             num_rows=1,
             num_cols=2,
@@ -37,7 +37,7 @@ class UnlockState(RoomGrid):
 
         if action == self.actions.toggle:
             if self.door.is_open:
-                reward = self._reward()
+                reward = 1
 
         return obs, reward, done, info
 
