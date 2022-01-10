@@ -35,9 +35,8 @@ class UnlockState(RoomGrid):
     def step(self, action):
         obs, reward, done, info = super().step(action)
 
-        if action == self.actions.toggle:
-            if self.door.is_open:
-                reward = 1
+        if self.door.is_open:
+            reward = 1
 
         return obs, reward, done, info
 
@@ -55,6 +54,11 @@ class UnlockState(RoomGrid):
         ])
 
         return obs
+
+    def get_task_successes(self, tasks, observation, action, env_info):
+        door_opened = int(observation[..., 7] > 0)
+        key_obtained = int(observation[..., [3, 4]].sum() < 0)
+        return [door_opened, key_obtained, door_opened]
 
 register(
     id='MiniGrid-Unlock-State-v0',
