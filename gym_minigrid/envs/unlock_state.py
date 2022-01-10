@@ -58,7 +58,7 @@ class UnlockState(RoomGrid):
     def get_task_successes(self, tasks, observation, action, env_info):
         door_opened = int(observation[..., 7] > 0)
         key_obtained = int(observation[..., [3, 4]].sum() < 0)
-        return [door_opened, key_obtained, door_opened]
+        return [door_opened, key_obtained, door_opened, action in (3, 5)]
 
 register(
     id='MiniGrid-Unlock-State-v0',
